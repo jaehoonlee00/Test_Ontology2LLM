@@ -5,9 +5,12 @@
 
 :Event a owl:Class .
 :Action a owl:Class .
+:TriggerRule a owl:Class ;
+    rdfs:label "Trigger Rule" ;
+    rdfs:comment "Defines a condition-based rule that maps events to actions." .
 
 :triggers a owl:ObjectProperty ;
-    rdfs:domain owl:Thing ;
+    rdfs:domain :TriggerRule ;
     rdfs:range :Action .
 
 :hasImplementation a owl:DatatypeProperty ;
@@ -15,13 +18,13 @@
     rdfs:range xsd:string .
 
 :hasSeverity a owl:DatatypeProperty ;
-    rdfs:domain :Event ;
+    rdfs:domain :Event, :TriggerRule ;
     rdfs:range xsd:string .
 
 :description a owl:AnnotationProperty .
 
 :eventName a owl:DatatypeProperty ;
-    rdfs:domain owl:Thing ;
+    rdfs:domain :TriggerRule ;
     rdfs:range xsd:string .
 
 ### 이벤트 인스턴스 ###
@@ -38,17 +41,17 @@
     :description "Activate lockdown procedure" ;
     :hasImplementation "lockdown.activate" .
 
-:SendAccessAlert a :Action ;
-    :description "Send access alert" ;
+:SendAlertOnly a :Action ;
+    :description "Send alert to admin only" ;
     :hasImplementation "alert.access" .
 
-### 트리거 인스턴스 ###
-:high_Severity_Trigger a owl:Thing ;
+### 트리거 규칙 인스턴스 ###
+:high_Severity_Trigger a :TriggerRule ;
     :triggers :ActivateLockdown ;
     :hasSeverity "high" ;
     :eventName "UnauthorizedAccessDetected" .
 
-:low_Severity_Trigger a owl:Thing ;
-    :triggers :SendAccessAlert ;
+:low_Severity_Trigger a :TriggerRule ;
+    :triggers :SendAlertOnly ;
     :hasSeverity "low" ;
     :eventName "AccessDetected" .
