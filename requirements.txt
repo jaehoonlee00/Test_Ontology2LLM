@@ -8,3 +8,6 @@ streamlit
 sqlalchemy
 typing-extensions
 python-dotenv
+langchain-core
+langchain-openai
+python-dotenv
