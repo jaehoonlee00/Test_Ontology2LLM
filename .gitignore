@@ -1,0 +1,22 @@
+# Python virtual environment
+venv/
+.venv/
+__pycache__/
+
+# Environment variables
+.env
+.env.*
+
+# Data files (if not meant for Git)
+*.csv
+*.txt
+*.xlsx
+
+# Streamlit specific (if generated locally)
+.streamlit/
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db

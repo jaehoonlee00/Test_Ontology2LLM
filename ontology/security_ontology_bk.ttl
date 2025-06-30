@@ -1,0 +1,54 @@
+@prefix : <http://example.org/security#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+:Event a owl:Class .
+:Action a owl:Class .
+
+:triggers a owl:ObjectProperty ;
+    rdfs:domain owl:Thing ;
+    rdfs:range :Action .
+
+:hasImplementation a owl:DatatypeProperty ;
+    rdfs:domain :Action ;
+    rdfs:range xsd:string .
+
+:hasSeverity a owl:DatatypeProperty ;
+    rdfs:domain :Thing ;
+    rdfs:range xsd:string .
+
+:description a owl:AnnotationProperty .
+
+:eventName a owl:DatatypeProperty ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:string .
+
+
+### 이벤트 인스턴스 ###
+:UnauthorizedAccessDetected a :Event ;
+    rdfs:label "Unauthorized Access Detected" ;
+    :hasSeverity "high" .
+
+### 액션 인스턴스 ###
+:ActivateLockdown a :Action ;
+    :description "Activate lockdown procedure" ;
+    :hasImplementation "lockdown.activate" .
+
+:SendAlertOnly a :Action ;
+    :description "Send alert to admin only" ;
+    :hasImplementation "alert.send" .
+
+### 수동 조건 기반 연결 ###
+:high_Severity_Trigger a owl:Thing ;
+    :triggers :ActivateLockdown ;
+    :hasSeverity "high" .
+
+:low_Severity_Trigger a owl:Thing ;
+    :triggers :SendAlertOnly ;
+    :hasSeverity "low" .
+
+:high_Severity_Trigger :eventName "UnauthorizedAccessDetected"^^xsd:string .
+:low_Severity_Trigger :eventName "UnauthorizedAccessDetected"^^xsd:string .
+
+
