@@ -1,0 +1,10 @@
+rdflib
+streamlit
+langchain
+langgraph
+openai
+psycopg2-binary
+streamlit
+sqlalchemy
+typing-extensions
+python-dotenv
