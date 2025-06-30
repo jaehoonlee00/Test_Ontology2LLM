@@ -1,11 +1,13 @@
 from rdflib import Graph, Namespace
 from langgraph.graph import StateGraph
 from langchain_core.runnables import RunnableLambda
+import streamlit as st
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# 환경변수로 API 키 설정
+os.environ["OPENAI_API_KEY"] = st.secrets["openai"]["api_key"]
 
 llm = ChatOpenAI(model="gpt-4o", temperature=0.3)
 
